@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import {findDOMNode} from 'react-dom'
-import CommentList from './CommentList'
+//import CommentList from './CommentList'
+import CommentList from './CommentListOld'
 
 class Article extends Component {
     static propTypes = {

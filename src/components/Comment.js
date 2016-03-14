@@ -13,4 +13,4 @@ class Comment extends Component {
     }
 }
 
-export default Commento
+export default Comment
