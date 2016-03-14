@@ -8,7 +8,6 @@ class Article extends Component {
         article: PropTypes.object.isRequired
     }
 
-
     componentWillMount() {
         console.log('---', 'going to mount');
     }

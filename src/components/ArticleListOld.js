@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import Article from './Article'
 import CommentList from './CommentList'
-import openArticle from '../HOC/openArticle'
+import openArticle from '../mixins/openArticle'
 
-class ArticleList extends Component {
+export default React.createClass({
 
-    render() {
-        const { openArticle } = this.props
+    mixins: [openArticle],
+
+    render: function() {
         const articles = this.props.articles.map((article) =>
             <li key={article.id}>
                 <Article article={article}
-                         openArticle = {openArticle(article.id)}
-                         isOpen = {article.id === this.props.openArticleId}/>
+                         openArticle = {this.openArticle(article.id)}
+                         isOpen = {article.id === this.state.openArticleId}/>
             </li>
         )
         return (
@@ -23,6 +24,4 @@ class ArticleList extends Component {
         )
     }
 
-}
-
-export default openArticle(ArticleList)
+})
