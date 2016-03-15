@@ -31,6 +31,7 @@ export default React.createClass({
     },
     
     addComment(){
+        //нет-нет-нет, мы же говорили никогда не менять пропсы! Но Вам и не надо было делать сам функционал добавления
         this.props.comments.push({
             'id': this.props.comments.length + 1,
             'name': '',
