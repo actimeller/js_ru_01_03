@@ -1,18 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import Article from './Article'
 import CommentList from './CommentList'
-import openArticle from '../mixins/openArticle'
+import oneOpen from '../mixins/oneOpen'
 
-export default React.createClass({
-
-    mixins: [openArticle],
-
-    render: function() {
+const ArticleList = React.createClass({
+    mixins: [oneOpen],
+    render() {
         const articles = this.props.articles.map((article) =>
             <li key={article.id}>
                 <Article article={article}
-                         openArticle = {this.openArticle(article.id)}
-                         isOpen = {article.id === this.state.openArticleId}/>
+                         openArticle = {this.openItem(article.id)}
+                         isOpen = {this.isItemOpen(article.id)}/>
             </li>
         )
         return (
@@ -22,6 +20,8 @@ export default React.createClass({
                 </ul>
             </div>
         )
-    }
+    },
 
 })
+
+export default ArticleList

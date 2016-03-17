@@ -1,23 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import Article from './Article'
 import CommentList from './CommentList'
-import openArticle from '../HOC/openArticle'
+import oneOpen from '../HOC/oneOpen'
 
 class ArticleList extends Component {
-
     render() {
-        const { openArticle } = this.props
-        const articles = this.props.articles.map((article) =>
+        const { articles, isItemOpen, openItem } = this.props
+        const articleItems = articles.map((article) =>
             <li key={article.id}>
                 <Article article={article}
-                         openArticle = {openArticle(article.id)}
-                         isOpen = {article.id === this.props.openArticleId}/>
+                         openArticle = {openItem(article.id)}
+                         isOpen = {isItemOpen(article.id)}/>
             </li>
         )
         return (
             <div>
                 <ul>
-                    {articles}
+                    {articleItems}
                 </ul>
             </div>
         )
@@ -25,4 +24,4 @@ class ArticleList extends Component {
 
 }
 
-export default openArticle(ArticleList)
+export default oneOpen(ArticleList)
