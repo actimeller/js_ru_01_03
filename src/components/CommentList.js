@@ -39,6 +39,7 @@ const CommentList = React.createClass({
 
     handleAddComment(ev) {
         ev.preventDefault()
+        //не стоит в глубоком компоненте завязываться на сторы + тут незачем все комменты знать + генерация id на основе length - верный путь к неуникальным id
         addComment(this.props.articleId, this.state.comments.length + 1, 'name', this.state.comment)
         this.setState({
             comment: '',
