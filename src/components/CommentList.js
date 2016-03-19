@@ -2,18 +2,16 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../HOC/toggleOpen'
 import linkedState from 'react-addons-linked-state-mixin'
-import { addComment } from '../actions/comments'
-import { commentStore } from '../stores'
 
 const CommentList = React.createClass({
     mixins: [linkedState],
     propTypes: {
-        comments: PropTypes.array
+        comments: PropTypes.array,
+        addComment: PropTypes.func.isRequired
     },
     getInitialState() {
         return {
-            comment: '',
-            comments: commentStore.getAll()
+            comment: ''
         }
     },
     render() {
@@ -33,20 +31,16 @@ const CommentList = React.createClass({
         if (!this.props.isOpen) return null
         return <div>
             <input valueLink={this.linkState("comment")}/>
-            <a href="#" onClick={this.handleAddComment}>add comment</a>
+            <a href = "#" onClick = {this.addComment}>add comment</a>
         </div>
     },
-
-    handleAddComment(ev) {
+    addComment(ev) {
         ev.preventDefault()
-        //не стоит в глубоком компоненте завязываться на сторы + тут незачем все комменты знать + генерация id на основе length - верный путь к неуникальным id
-        addComment(this.props.articleId, this.state.comments.length + 1, 'name', this.state.comment)
+        this.props.addComment(this.state.comment)
         this.setState({
-            comment: '',
-            comments: commentStore.getAll()
+            comment: ''
         })
     }
 })
-
 
 export default toggleOpen(CommentList)

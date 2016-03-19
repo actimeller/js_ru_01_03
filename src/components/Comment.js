@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import CommentBody from './CommentBody'
 
 class Comment extends Component {
     static propTypes = {
@@ -8,7 +7,9 @@ class Comment extends Component {
 
     render() {
         return (
-            CommentBody(this.props)
+            <div>
+                <p>{this.props.comment.text}</p>
+            </div>
         )
     }
 }
