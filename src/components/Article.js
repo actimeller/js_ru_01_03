@@ -2,12 +2,34 @@ import React, { Component, PropTypes } from 'react'
 import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
 import { deleteArticle, loadArticleById } from '../actions/articles'
-import { addComment } from '../actions/comments'
+import { addComment, loadComments } from '../actions/comments'
+import { commentStore } from '../stores'
 
 class Article extends Component {
     static propTypes = {
         isOpen: PropTypes.bool,
         article: PropTypes.object.isRequired
+    }
+
+    constructor() {
+        super()
+        this.state = {
+            commentsLoading: commentStore.loading
+        }
+    }
+
+    componentDidMount() {
+        commentStore.addChangeListener(this.commentsChanged)
+    }
+
+    componentWillUnmount() {
+        commentStore.removeChangeListener(this.commentsChanged)
+    }
+
+    commentsChanged =() => {
+        this.setState({
+            commentsLoading: commentStore.loading
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -48,11 +70,16 @@ class Article extends Component {
     getCommentList() {
         const { article } = this.props
         const comments = article.getRelation('comments')
-        if (comments.includes(undefined)) return <h3>comments: {comments.length}</h3>
+        if (this.state.commentsLoading) return <h4>comments loading...</h4>
+        if (comments.includes(undefined)) return <h4 onClick={this.getComments}>comments: {comments.length}</h4>
         return  <CommentList ref= "comments"
                              comments = {comments}
                              addComment = {this.addComment}/>
 
+    }
+
+    getComments = () => {
+        loadComments({id: this.props.article.id})
     }
 
     addComment = (comment) => {
