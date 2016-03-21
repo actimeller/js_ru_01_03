@@ -23,6 +23,7 @@ class Comment extends SimpleStore {
 
                 case LOAD_COMMENTS + _SUCCESS:
                     response.forEach(this.__add)
+                    //это хорошо если все выкачиваете. Нужно индикатор загрузки для конкретных комментов/статьи
                     this.loading = false
                     this.loaded = true
                     break;
