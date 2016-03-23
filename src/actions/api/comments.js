@@ -1,5 +1,5 @@
 import $ from 'jquery'
 
-export function loadCommentsByArticleId({ id }) {
+export function loadForArticle({ id }) {
     return $.get(`/api/comment?article=${id}`)
 }
