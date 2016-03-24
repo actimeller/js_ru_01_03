@@ -65,6 +65,10 @@ class ArticleStore extends SimpleStore {
         if (!this.loaded && !this.loading) loadAllArticles()
         return this.getAll()
     }
+
+    checkAndLoad(article) {
+        if (!this.loaded && !this.loading) setTimeout(() => loadArticleById({id: article.id}), 0)
+    }
 }
 
 export default ArticleStore

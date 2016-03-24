@@ -15,7 +15,7 @@ class ArticlePage extends Component {
     }
 
     componentDidMount() {
-        this.checkAndLoad(this.state.article)
+        articleStore.checkAndLoad(this.state.article)
         articleStore.addChangeListener(this.articlesChanged)
     }
 
@@ -24,7 +24,7 @@ class ArticlePage extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.checkAndLoad(articleStore.getById(nextProps.params.id))
+        articleStore.checkAndLoad(articleStore.getById(nextProps.params.id))
         this.articlesChanged(nextProps)
     }
 

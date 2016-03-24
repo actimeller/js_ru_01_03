@@ -4,6 +4,7 @@ import App from './containers/App'
 import Articles from './containers/Articles'
 import ArticlePage from './containers/ArticlePage'
 import NewArticle from './containers/NewArticle'
+import CommentsPagination from './containers/CommentsPagination'
 
 export default (
     <Router history = {browserHistory}>
@@ -12,6 +13,7 @@ export default (
                 <Route path = "new" component = {NewArticle} />
                 <Route path = ":id" component = {ArticlePage} />
             </Route>
+            <Route path="/comments/:id" component= {CommentsPagination} />
         </Route>
     </Router>
 )
