@@ -28,6 +28,7 @@ class Comment extends SimpleStore {
 
                 case LOAD_PART_OF_COMMENTS + _SUCCESS:
                     response.records.forEach(this.__add)
+                    //лучше сохранять какую именно стрницу грузишь
                     this.loading = false
                     this.loaded = true
                     break;
