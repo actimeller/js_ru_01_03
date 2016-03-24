@@ -33,7 +33,7 @@ class CommentsPagination extends Component {
         const { loading, comments } = this.state;
         const commentItems = comments.map((comment) => <li key={comment.id}><Comment comment = {comment}/></li>)
         if (loading) return <h1>Loading...</h1>
-        return <ul>{commentItems} / {this.props.params.id}</ul>
+        return <ul>{commentItems}</ul>
     }
 
 

@@ -5,6 +5,5 @@ export function loadForArticle({ id }) {
 }
 
 export function loadPart({ id }) {
-    console.info('api --- ', id);
     return $.get(`/api/comment?limit=10&offset=${id}`)
 }

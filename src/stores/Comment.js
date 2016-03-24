@@ -38,7 +38,7 @@ class Comment extends SimpleStore {
         })
     }
     getOrLoadComments(id) {
-        if (!this.loaded && !this.loading) loadPartOfComments(id)
+        if (!this.loaded && !this.loading) loadPartOfComments({id: id})
         return this.getAll()
     }
 }
