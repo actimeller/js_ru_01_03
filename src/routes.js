@@ -13,6 +13,7 @@ export default (
                 <Route path = "new" component = {NewArticle} />
                 <Route path = ":id" component = {ArticlePage} />
             </Route>
+            // :page было бы понятнее
             <Route path="/comments/:id" component= {CommentsPagination} />
         </Route>
     </Router>
