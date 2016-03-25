@@ -66,6 +66,7 @@ class ArticleStore extends SimpleStore {
         return this.getAll()
     }
     checkAndLoad(id) {
+        //loaded и loading віставляються независимо от статьи  в LOAD_ALL_ARTICLES. Надо или указівать id или прописывать эти метки в конкретной статье
         if (!this.loaded && !this.loading) setTimeout(() => loadArticleById({id: id}), 0)
         return this.getById(id)
     }
