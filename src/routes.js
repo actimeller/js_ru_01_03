@@ -1,19 +1,30 @@
 import React from 'react'
-import { Router, Route, browserHistory, hashHistory } from 'react-router'
+import { Router, Route, Redirect, IndexRedirect } from 'react-router'
 import App from './containers/App'
 import Articles from './containers/Articles'
 import ArticlePage from './containers/ArticlePage'
 import NewArticle from './containers/NewArticle'
-import CommentsPagination from './containers/CommentsPagination'
+import CommentsIndex from './containers/CommentIndex'
+import CommentsPaginationPage from './containers/CommentsPaginationPage'
+import NotFound from './containers/NotFound'
+import history from './history'
 
 export default (
-    <Router history = {browserHistory}>
+    <Router history = {history}>
         <Route path="/" component = {App}>
-            <Route path ="/articles" component = {Articles}>
-                <Route path = "new" component = {NewArticle} />
+            <Redirect from="article" to="articles" />
+            <Route path ="articles" components = {Articles}>
+                <Route path = "new" component = {NewArticle}
+                    onEnter = {() => console.log('---', 'entering route new')}
+                    onLeave = {() => console.log('---', 'leaving route new')}
+                />
                 <Route path = ":id" component = {ArticlePage} />
             </Route>
-            <Route path="/comments/:id" component= {CommentsPagination} />
+            <Route path="comments" component = {CommentsIndex}>
+                <IndexRedirect to="1"/>
+                <Route path = ":page" component = {CommentsPaginationPage} />
+            </Route>
+            <Route path="*" component={NotFound} />
         </Route>
     </Router>
 )

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { articleStore } from '../stores'
 import Article from '../components/Article'
+import { loadArticleById } from '../actions/articles'
 
 class ArticlePage extends Component {
     static propTypes = {
@@ -14,7 +15,7 @@ class ArticlePage extends Component {
     }
 
     componentDidMount() {
-        articleStore.checkAndLoad(this.state.article)
+        this.checkAndLoad(this.state.article)
         articleStore.addChangeListener(this.articlesChanged)
     }
 
@@ -23,8 +24,12 @@ class ArticlePage extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        articleStore.checkAndLoad(articleStore.getById(nextProps.params.id))
+        this.checkAndLoad(articleStore.getById(nextProps.params.id))
         this.articlesChanged(nextProps)
+    }
+
+    checkAndLoad = (article) => {
+        if (!article.loaded && !article.loading) setTimeout(() => loadArticleById({id: article.id}), 0)
     }
 
     articlesChanged =(props) => {
