@@ -9,6 +9,12 @@ const CommentList = React.createClass({
     propTypes: {
         article: PropTypes.object
     },
+
+    contextTypes: {
+        library: PropTypes.object,
+        lang: PropTypes.string
+    },
+
     getInitialState() {
         return {
             comment: ''
@@ -21,8 +27,12 @@ const CommentList = React.createClass({
         if (isOpen && !this.props.isOpen) loadCommentsForArticle({id: article.id})
     },
     render() {
+        const { library } = this.context
+
         const { isOpen, toggleOpen, article,children } = this.props
-        const actionText = isOpen ? 'hide comments' : 'show comments'
+        const actionText = isOpen ?
+            this.context.lang === 'ru' ? library.hideComments[1] : library.hideComments[0] :
+            this.context.lang === 'ru' ? library.showComments[1] : library.showComments[0]
         return (
             <div>
                 {children}
@@ -33,10 +43,12 @@ const CommentList = React.createClass({
         )
     },
     getInput() {
+        const { library } = this.context
+
         if (!this.props.isOpen) return null
         return <div>
             <input valueLink={this.linkState("comment")}/>
-            <a href = "#" onClick = {this.addComment}>add comment</a>
+            <a href = "#" onClick = {this.addComment}>{this.context.lang === 'ru' ? library.addComment[1] : library.addComment[0]}</a>
         </div>
     },
 

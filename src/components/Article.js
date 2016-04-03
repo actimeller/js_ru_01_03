@@ -15,10 +15,16 @@ class Article extends Component {
         article: PropTypes.object.isRequired
     }
 
+    static contextTypes = {
+        library: PropTypes.object,
+        lang: PropTypes.string
+    }
+
     render() {
+        const { library } = this.context
         return (
             <div ref="container">
-                <a href = "#" onClick = {this.handleDelete}>delete</a>
+                <a href = "#" onClick = {this.handleDelete}>{this.context.lang === 'ru' ? library.delete[1] : library.delete[0] }</a>
                 {this.getTitle()}
                 {this.getBody()}
             </div>

@@ -14,11 +14,13 @@ class Articles extends Component {
     }
 
     static contextTypes = {
-        router: PropTypes.object
+        router: PropTypes.object,
+        library: PropTypes.object,
+        lang: PropTypes.string
     }
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
     }
 
     getChildContext() {
@@ -46,12 +48,13 @@ class Articles extends Component {
 
     render() {
         const { articles, loading } = this.state
+        const { library } = this.context
         if (loading) return <h1>Loading...</h1>
         return (
             <div>
                 <h3 onClick = {this.goToNewArticle}>New Article</h3>
                 <input value={this.state.name} onChange = {this.changeName}/>
-                <a href="#" onClick = {this.signIn} >sign in</a>
+                <a href="#" onClick = {this.signIn} >{this.context.lang === 'ru' ? library.sign[1] : library.sign[0] }</a>
                 <ArticleList articles = {articles}/>
                 {this.props.children}
             </div>
