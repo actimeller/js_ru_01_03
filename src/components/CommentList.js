@@ -12,6 +12,7 @@ const CommentList = React.createClass({
 
     contextTypes: {
         library: PropTypes.object,
+        user: PropTypes.string,
         lang: PropTypes.string
     },
 
@@ -63,7 +64,7 @@ const CommentList = React.createClass({
 
     addComment(ev) {
         ev.preventDefault()
-        addComment(this.props.article.id, this.state.comment)
+        addComment(this.context.user + ' wrote: ' + this.state.comment, this.props.article.id)
         this.setState({
             comment: ''
         })

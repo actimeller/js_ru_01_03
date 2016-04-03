@@ -18,6 +18,7 @@ class ArticleStore extends SimpleStore {
                 case ADD_COMMENT:
                     AppDispatcher.waitFor([stores.comments.dispatchToken])
                     const article = this.getById(data.articleId)
+                    console.info(data);
                     article.comments = (article.comments || []).concat(stores.comments.getCurrentId())
                     break;
 

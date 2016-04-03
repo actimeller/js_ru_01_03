@@ -8,6 +8,7 @@ class SimpleStore extends EventEmitter {
         this.__items = []
         if (initialState) initialState.forEach(this.__add)
         this.__incrementalId = Math.max(...this.__items.map(el => el.id)) + 1000
+
     }
 
     addChangeListener(callback) {
@@ -48,6 +49,12 @@ class SimpleStore extends EventEmitter {
 
     generateId() {
         return ++this.__incrementalId
+    }
+
+    randomInteger = (min, max) => {
+        var rand = min + Math.random() * (max - min)
+        rand = Math.round(rand);
+        return rand;
     }
 
     getCurrentId() {
