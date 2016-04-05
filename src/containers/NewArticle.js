@@ -11,6 +11,7 @@ class NewArticle extends Component {
     }
 
     render() {
+        //ошибка в консоли из-за этого вызова. В методе рендер нельзя ничего менять, только строить новую структуру. Редирект - это сайд-эффект
         if (!this.context.user) this.context.router.replace('/articles')
         return (
             <div>
