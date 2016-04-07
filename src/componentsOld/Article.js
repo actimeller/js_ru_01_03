@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
 import { deleteArticle, loadArticleById } from '../actions/articles'
+import translate from '../HOC/translate'
 
 function isEqual(obj1, obj2) {
 
@@ -15,16 +16,11 @@ class Article extends Component {
         article: PropTypes.object.isRequired
     }
 
-    static contextTypes = {
-        library: PropTypes.object,
-        lang: PropTypes.string
-    }
-
     render() {
-        const { library } = this.context
+        const { translate } = this.props
         return (
             <div ref="container">
-                <a href = "#" onClick = {this.handleDelete}>{this.context.lang === 'ru' ? library.delete[1] : library.delete[0] }</a>
+                <a href = "#" onClick = {this.handleDelete}>{translate('delete this article')}</a>
                 {this.getTitle()}
                 {this.getBody()}
             </div>
@@ -41,8 +37,8 @@ class Article extends Component {
     }
 
     getBody() {
-        const { article, isOpen } = this.props
-        if (article.loading) return <h3>Loading article</h3>
+        const { article, translate, isOpen } = this.props
+        if (article.loading) return <h3>{translate('loading')}</h3>
         return (
             <div>
                 <p>{article.text}</p>
@@ -73,4 +69,4 @@ class Article extends Component {
     }
 }
 
-export default Article
+export default translate(Article)
